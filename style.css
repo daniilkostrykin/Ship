@@ -122,10 +122,12 @@ body {
   transition: opacity 0.4s ease;
   padding: 0 10px;
 }
+
 .game-modal.show {
   opacity: 1;
   pointer-events: auto;
 }
+
 .game-modal .content {
   background: #fff;
   max-width: 420px;
@@ -134,26 +136,31 @@ body {
   border-radius: 10px;
   padding: 30px;
 }
+
 .game-modal img {
-  width: 410px; /* Установите нужную ширину */
-  height: auto; /* Высота будет автоматически рассчитываться для поддержания пропорций */
+  max-width: 100%; /* Убедитесь, что изображение не превышает ширину контейнера */
+  height: auto; /* Высота будет автоматически рассчитываться */
 }
 
 .game-modal h4 {
   font-size: 1.53rem;
 }
+
 .game-modal p {
   font-size: 1.15rem;
   margin: 15px 0 30px;
   font-weight: 500;
 }
+
 .game-modal p b {
   color: #5e63ba;
   font-weight: 600;
 }
+
 .game-modal button {
   padding: 12px 23px;
 }
+
 @media (max-width: 782px) {
   .container {
     flex-direction: column;
@@ -161,9 +168,49 @@ body {
     align-items: center;
   }
   .hangman-box img {
-    max-width: 200px;
+    max-width: 400px;
   }
   .hangman-box h1 {
     display: none;
+  }
+}
+@media (max-width: 475px) {
+  .container {
+    width: 100%; /* Убедитесь, что контейнер занимает всю ширину экрана */
+    padding: 20px; /* Уменьшите отступы, чтобы контент поместился на маленьком экране */
+    flex-direction: column; /* Расположите элементы в колонку для лучшего отображения */
+    align-items: center; /* Центрируйте элементы по горизонтали */
+  }
+
+  .hangman-box {
+    text-align: center; /* Центрируйте текст внутри .hangman-box */
+  }
+
+  .hangman-box img {
+    max-width: 100%; /* Сделайте изображение адаптивным и не превышающим ширину контейнера */
+    margin-bottom: -40px; /* Увеличьте отступ сверху для лучшего отображения */
+  }
+
+  .game-box {
+    text-align: center; /* Центрируйте текст и другие элементы внутри .game-box */
+  }
+
+  .word-display {
+    font-size: 1.2rem; /* Уменьшите размер шрифта для лучшего отображения на маленьком экране */
+  }
+
+  .game-modal .content {
+    max-width: 90%; /* Уменьшите максимальную ширину модального окна для маленьких экранов */
+    padding: 20px; /* Уменьшите внутренние отступы */
+  }
+
+  .game-modal img {
+    width: 100%; /* Сделайте изображение адаптивным в модальном окне */
+  }
+
+  .keyboard button {
+    width: calc(
+      100% / 8 - 5px
+    ); /* Пересчитайте ширину кнопок для меньшего экрана */
   }
 }
