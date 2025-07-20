@@ -5,10 +5,24 @@ const wordDisplay = document.querySelector(".word-display");
 const gameModal = document.querySelector(".game-modal");
 const playAgainBtn = document.querySelector(".play-again");
 let currentWord,
-    correctLetters = [];
+  correctLetters = [];
 wrongGuessCount = 0;
 const maxGuesses = 8;
 let usedWords = [];
+let currentDifficulty = "easy";
+
+const difficultySelect = document.getElementById("difficulty-select");
+if (difficultySelect) {
+  difficultySelect.addEventListener("change", (e) => {
+    currentDifficulty = e.target.value;
+    usedWords = [];
+    getRandomWord();
+  });
+}
+
+function getWordsByDifficulty(level) {
+  return wordList.filter((w) => w.level === level);
+}
 
 const resetGame = () => {
   correctLetters = [];
@@ -32,20 +46,21 @@ const resetGame = () => {
 };
 
 const getRandomWord = () => {
-  if (usedWords.length === wordList.length) {
-    alert("Все слова были использованы. Перезапускаем список.");
+  const availableWords = getWordsByDifficulty(currentDifficulty);
+  if (usedWords.length === availableWords.length) {
+    alert("Все слова этого уровня были использованы. Перезапускаем список.");
     usedWords = [];
   }
 
   let wordObj;
   do {
-    wordObj = wordList[Math.floor(Math.random() * wordList.length)];
+    wordObj = availableWords[Math.floor(Math.random() * availableWords.length)];
   } while (usedWords.includes(wordObj.word));
 
   usedWords.push(wordObj.word);
   currentWord = wordObj.word;
   document.querySelector(".hint-text b").innerText = wordObj.hint;
-  
+
   resetGame();
 };
 
@@ -115,8 +130,10 @@ playAgainBtn.addEventListener("click", getRandomWord);
 document.addEventListener("keydown", (e) => {
   if (!/Mobi|Android/i.test(navigator.userAgent)) {
     const letter = e.key.toUpperCase();
-    if (letter >= 'А' && letter <= 'Я' || letter === 'Ё') {
-      const button = [...keyboardDiv.querySelectorAll('button')].find(btn => btn.innerText === letter);
+    if ((letter >= "А" && letter <= "Я") || letter === "Ё") {
+      const button = [...keyboardDiv.querySelectorAll("button")].find(
+        (btn) => btn.innerText === letter
+      );
       if (button && !button.disabled) {
         initGame(button, letter);
       }

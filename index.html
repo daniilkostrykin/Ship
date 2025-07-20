@@ -4,7 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ship Game</title>
-    <link rel="icon" href="images/free-icon-paper-boat-1440165.png" type="image/x-icon">
+    <link
+      rel="icon"
+      href="images/free-icon-paper-boat-1440165.png"
+      type="image/x-icon"
+    />
     <link rel="stylesheet" href="style.css" />
     <script src="scripts/word-list.js" defer></script>
     <script src="scripts/script.js" defer></script>
@@ -22,6 +26,14 @@
       <div class="hangman-box">
         <img src="images/ship0.png" alt="hangman-img" />
         <h1>Ship Game</h1>
+        <div style="margin-top: 20px; text-align: center">
+          <label for="difficulty-select">Сложность: </label>
+          <select id="difficulty-select" class="difficulty-select">
+            <option value="easy">Легкий</option>
+            <option value="medium">Средний</option>
+            <option value="hard">Тяжелый</option>
+          </select>
+        </div>
       </div>
       <div class="game-box">
         <ul class="word-display"></ul>

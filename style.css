@@ -161,6 +161,21 @@ body {
   padding: 12px 23px;
 }
 
+.difficulty-select {
+  margin-top: 10px;
+  padding: 6px 12px;
+  font-size: 1rem;
+  border-radius: 4px;
+  border: 1px solid #5e63ba;
+  background: #f5f5ff;
+  color: #333;
+  outline: none;
+  margin-bottom: 10px;
+}
+.difficulty-select:focus {
+  border-color: #3a3eb1;
+}
+
 @media (max-width: 782px) {
   .container {
     flex-direction: column;
