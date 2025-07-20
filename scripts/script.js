@@ -10,6 +10,7 @@ wrongGuessCount = 0;
 const maxGuesses = 8;
 let usedWords = [];
 let currentDifficulty = "easy";
+let currentCategory = "all";
 
 const difficultySelect = document.getElementById("difficulty-select");
 if (difficultySelect) {
@@ -20,8 +21,21 @@ if (difficultySelect) {
   });
 }
 
-function getWordsByDifficulty(level) {
-  return wordList.filter((w) => w.level === level);
+const categorySelect = document.getElementById("category-select");
+if (categorySelect) {
+  categorySelect.addEventListener("change", (e) => {
+    currentCategory = e.target.value;
+    usedWords = [];
+    getRandomWord();
+  });
+}
+
+function getWordsByDifficultyAndCategory(level, category) {
+  let filtered = wordList.filter((w) => w.level === level);
+  if (category !== "all") {
+    filtered = filtered.filter((w) => w.category === category);
+  }
+  return filtered;
 }
 
 const resetGame = () => {
@@ -46,9 +60,18 @@ const resetGame = () => {
 };
 
 const getRandomWord = () => {
-  const availableWords = getWordsByDifficulty(currentDifficulty);
+  const availableWords = getWordsByDifficultyAndCategory(
+    currentDifficulty,
+    currentCategory
+  );
+  if (availableWords.length === 0) {
+    alert("Нет слов для выбранной категории и сложности!");
+    return;
+  }
   if (usedWords.length === availableWords.length) {
-    alert("Все слова этого уровня были использованы. Перезапускаем список.");
+    alert(
+      "Все слова этого уровня и категории были использованы. Перезапускаем список."
+    );
     usedWords = [];
   }
 
