@@ -60,20 +60,17 @@ const getRandomWord = () => {
   usedWords.push(wordObj.word);
   currentWord = wordObj.word;
   document.querySelector(".hint-text b").innerText = wordObj.hint;
-
   resetGame();
 };
 
 const gameOver = (isVictory) => {
   setTimeout(() => {
-    const modalText = isVictory
-      ? `You found the word: `
-      : `The correct word was: `;
+    const modalText = isVictory ? `Вы угадали слово:` : `Правильное слово:`;
     gameModal.querySelector("img").src = `images/${
       isVictory ? `victory` : `lost`
     }.gif`;
     gameModal.querySelector("h4").innerText = `${
-      isVictory ? `Congratulations!` : `Game Over!`
+      isVictory ? `Поздравляем!` : `Игра окончена!`
     }`;
     gameModal.querySelector(
       "p"
