@@ -3,39 +3,145 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Кораблик</title>
+    <title>Кораблик — выбор режима</title>
     <link
       rel="icon"
       href="images/free-icon-paper-boat-1440165.png"
       type="image/x-icon"
     />
     <link rel="stylesheet" href="style.css" />
-    <script src="scripts/word-list.js" defer></script>
-    <script src="scripts/script.js" defer></script>
+    <style>
+      body {
+        background: linear-gradient(135deg, #5e63ba 0%, #a7b8f5 100%);
+        min-height: 100vh;
+        margin: 0;
+        font-family: "Segoe UI", "Roboto", Arial, sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .start-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        width: 100vw;
+      }
+      .start-form {
+        background: #fff;
+        padding: 40px 28px 32px 28px;
+        border-radius: 24px;
+        box-shadow: 0 8px 32px rgba(94, 99, 186, 0.18),
+          0 1.5px 8px rgba(0, 0, 0, 0.08);
+        display: flex;
+        flex-direction: column;
+        gap: 22px;
+        min-width: 300px;
+        max-width: 90vw;
+        animation: fadeIn 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+      .start-form label {
+        font-size: 1.13rem;
+        margin-bottom: 6px;
+        color: #5e63ba;
+        font-weight: 500;
+      }
+      .start-form select {
+        padding: 10px 14px;
+        font-size: 1.08rem;
+        border-radius: 8px;
+        border: 1.5px solid #a7b8f5;
+        background: #f5f5ff;
+        color: #333;
+        outline: none;
+        transition: border 0.2s;
+      }
+      .start-form select:focus {
+        border-color: #5e63ba;
+      }
+      .start-form button {
+        margin-top: 10px;
+        padding: 14px 0;
+        font-size: 1.18rem;
+        background: linear-gradient(90deg, #5e63ba 0%, #a7b8f5 100%);
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: 700;
+        box-shadow: 0 2px 8px rgba(94, 99, 186, 0.1);
+        letter-spacing: 0.5px;
+        transition: background 0.2s, transform 0.1s;
+      }
+      .start-form button:hover {
+        background: linear-gradient(90deg, #6e73d6 0%, #b7c8ff 100%);
+        transform: translateY(-2px) scale(1.03);
+      }
+      .start-title {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 18px;
+      }
+      .start-title img {
+        width: 64px;
+        height: 64px;
+        margin-bottom: 10px;
+        filter: drop-shadow(0 2px 8px #a7b8f5cc);
+      }
+      .start-title h1 {
+        font-size: 2.2rem;
+        color: #5e63ba;
+        font-weight: 800;
+        margin: 0;
+        letter-spacing: 1px;
+        text-shadow: 0 2px 8px #a7b8f544;
+      }
+      @media (max-width: 600px) {
+        .start-form {
+          min-width: 0;
+          width: 98vw;
+          padding: 24px 4vw 20px 4vw;
+        }
+        .start-title h1 {
+          font-size: 1.3rem;
+        }
+        .start-title img {
+          width: 44px;
+          height: 44px;
+        }
+      }
+    </style>
   </head>
   <body>
-    <div class="game-modal">
-      <div class="content">
-        <img src="images/lost.gif" alt="lost-gif" />
-        <h4>Игра окончена</h4>
-        <p>Правильное слово: <b>радуга</b></p>
-        <button class="play-again">Играть снова</button>
+    <div class="start-container">
+      <div class="start-title">
+        <img src="images/free-icon-paper-boat-1440165.png" alt="Кораблик" />
+        <h1>Кораблик</h1>
       </div>
-    </div>
-    <div class="container">
-      <div class="hangman-box">
-        <img src="images/ship0.png" alt="hangman-img" />
-        <div style="margin-top: 20px; text-align: center">
-          <label for="difficulty-select">Сложность: </label>
-          <select id="difficulty-select" class="difficulty-select">
+      <form class="start-form" id="startForm">
+        <div>
+          <label for="difficulty-select">Сложность:</label>
+          <select id="difficulty-select" name="difficulty">
             <option value="easy">Легкий</option>
             <option value="medium">Средний</option>
             <option value="hard">Тяжелый</option>
           </select>
-          <label for="category-select" style="margin-left: 20px"
-            >Категория:
-          </label>
-          <select id="category-select" class="category-select">
+        </div>
+        <div>
+          <label for="category-select">Категория:</label>
+          <select id="category-select" name="category">
             <option value="all">Все</option>
             <option value="животные">Животные</option>
             <option value="люди">Люди</option>
@@ -51,19 +157,20 @@
             <option value="одежда">Одежда</option>
           </select>
         </div>
-      </div>
-      <div class="game-box">
-        <ul class="word-display"></ul>
-        <h4 class="hint-text">
-          Подсказка:
-          <b>Здесь будет подсказка к слову.</b>
-        </h4>
-        <h4 class="guesses-text">
-          Ошибок:
-          <b>0 / 6</b>
-        </h4>
-        <div class="keyboard"></div>
-      </div>
+        <button type="submit">Играть</button>
+      </form>
     </div>
+    <script>
+      document
+        .getElementById("startForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          const difficulty = document.getElementById("difficulty-select").value;
+          const category = document.getElementById("category-select").value;
+          window.location.href = `game.html?difficulty=${encodeURIComponent(
+            difficulty
+          )}&category=${encodeURIComponent(category)}`;
+        });
+    </script>
   </body>
 </html>

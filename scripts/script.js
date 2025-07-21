@@ -1,3 +1,12 @@
+// Получение параметров из URL
+function getQueryParams() {
+  const params = new URLSearchParams(window.location.search);
+  return {
+    difficulty: params.get("difficulty") || "easy",
+    category: params.get("category") || "all",
+  };
+}
+
 const hangmanImage = document.querySelector(".hangman-box img");
 const keyboardDiv = document.querySelector(".keyboard");
 const guessesText = document.querySelector(".guesses-text b");
@@ -9,8 +18,11 @@ let currentWord,
 wrongGuessCount = 0;
 const maxGuesses = 8;
 let usedWords = [];
-let currentDifficulty = "easy";
-let currentCategory = "all";
+
+// Используем параметры из URL
+const params = getQueryParams();
+let currentDifficulty = params.difficulty;
+let currentCategory = params.category;
 
 const difficultySelect = document.getElementById("difficulty-select");
 if (difficultySelect) {
