@@ -12,13 +12,24 @@
     <link rel="stylesheet" href="style.css" />
     <style>
       body {
-        background: linear-gradient(135deg, #5e63ba 0%, #a7b8f5 100%);
         min-height: 100vh;
         margin: 0;
         font-family: "Segoe UI", "Roboto", Arial, sans-serif;
         display: flex;
         align-items: center;
         justify-content: center;
+        background: linear-gradient(135deg, #5e63ba 0%, #a7b8f5 100%);
+        position: relative;
+        overflow-x: hidden;
+      }
+      .wave-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 0;
+        pointer-events: none;
       }
       .start-container {
         display: flex;
@@ -27,18 +38,21 @@
         justify-content: center;
         min-height: 100vh;
         width: 100vw;
+        z-index: 1;
       }
       .start-form {
-        background: #fff;
-        padding: 40px 28px 32px 28px;
-        border-radius: 24px;
+        background: rgba(255, 255, 255, 0.75);
+        backdrop-filter: blur(12px) saturate(1.2);
+        -webkit-backdrop-filter: blur(12px) saturate(1.2);
+        padding: 44px 32px 36px 32px;
+        border-radius: 28px;
         box-shadow: 0 8px 32px rgba(94, 99, 186, 0.18),
           0 1.5px 8px rgba(0, 0, 0, 0.08);
         display: flex;
         flex-direction: column;
-        gap: 22px;
-        min-width: 300px;
-        max-width: 90vw;
+        gap: 26px;
+        min-width: 320px;
+        max-width: 95vw;
         animation: fadeIn 0.7s cubic-bezier(0.4, 0, 0.2, 1);
       }
       @keyframes fadeIn {
@@ -58,9 +72,9 @@
         font-weight: 500;
       }
       .start-form select {
-        padding: 10px 14px;
+        padding: 12px 16px;
         font-size: 1.08rem;
-        border-radius: 8px;
+        border-radius: 10px;
         border: 1.5px solid #a7b8f5;
         background: #f5f5ff;
         color: #333;
@@ -72,17 +86,21 @@
       }
       .start-form button {
         margin-top: 10px;
-        padding: 14px 0;
-        font-size: 1.18rem;
+        padding: 16px 0;
+        font-size: 1.22rem;
         background: linear-gradient(90deg, #5e63ba 0%, #a7b8f5 100%);
         color: #fff;
         border: none;
-        border-radius: 10px;
+        border-radius: 12px;
         cursor: pointer;
         font-weight: 700;
         box-shadow: 0 2px 8px rgba(94, 99, 186, 0.1);
         letter-spacing: 0.5px;
         transition: background 0.2s, transform 0.1s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
       }
       .start-form button:hover {
         background: linear-gradient(90deg, #6e73d6 0%, #b7c8ff 100%);
@@ -95,24 +113,51 @@
         margin-bottom: 18px;
       }
       .start-title img {
-        width: 64px;
-        height: 64px;
+        width: 72px;
+        height: 72px;
         margin-bottom: 10px;
-        filter: drop-shadow(0 2px 8px #a7b8f5cc);
+        filter: drop-shadow(0 2px 12px #a7b8f5cc);
+        animation: float-ship 2.5s ease-in-out infinite;
+      }
+      @keyframes float-ship {
+        0%,
+        100% {
+          transform: translateY(0) rotate(-5deg);
+        }
+        50% {
+          transform: translateY(-12px) rotate(7deg);
+        }
       }
       .start-title h1 {
-        font-size: 2.2rem;
+        font-size: 2.5rem;
         color: #5e63ba;
-        font-weight: 800;
+        font-weight: 900;
         margin: 0;
-        letter-spacing: 1px;
-        text-shadow: 0 2px 8px #a7b8f544;
+        letter-spacing: 1.5px;
+        text-shadow: 0 2px 12px #a7b8f544;
+      }
+      .start-title .subtitle {
+        font-size: 1.15rem;
+        color: #3a3eb1;
+        font-weight: 400;
+        margin-top: 6px;
+        margin-bottom: 0;
+        letter-spacing: 0.2px;
+        text-align: center;
+        text-shadow: 0 1px 6px #a7b8f522;
+      }
+      .play-icon {
+        width: 1.5em;
+        height: 1.5em;
+        vertical-align: middle;
+        margin-right: 2px;
+        filter: drop-shadow(0 1px 2px #5e63ba33);
       }
       @media (max-width: 600px) {
         .start-form {
           min-width: 0;
           width: 98vw;
-          padding: 24px 4vw 20px 4vw;
+          padding: 20px 2vw 16px 2vw;
         }
         .start-title h1 {
           font-size: 1.3rem;
@@ -125,10 +170,20 @@
     </style>
   </head>
   <body>
+    <svg class="wave-bg" viewBox="0 0 1440 320" preserveAspectRatio="none">
+      <path
+        fill="#fff"
+        fill-opacity="0.25"
+        d="M0,160L60,170.7C120,181,240,203,360,197.3C480,192,600,160,720,133.3C840,107,960,85,1080,101.3C1200,117,1320,171,1380,197.3L1440,224L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z"
+      ></path>
+    </svg>
     <div class="start-container">
       <div class="start-title">
         <img src="images/free-icon-paper-boat-1440165.png" alt="Кораблик" />
         <h1>Кораблик</h1>
+        <div class="subtitle">
+          Добро пожаловать в современную игру "Виселица" на русском языке!
+        </div>
       </div>
       <form class="start-form" id="startForm">
         <div>
@@ -157,7 +212,13 @@
             <option value="одежда">Одежда</option>
           </select>
         </div>
-        <button type="submit">Играть</button>
+        <button type="submit">
+          <svg class="play-icon" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="12" fill="#fff" opacity="0.18" />
+            <polygon points="10,8 16,12 10,16" fill="#5e63ba" />
+          </svg>
+          Играть
+        </button>
       </form>
     </div>
     <script>
